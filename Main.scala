@@ -1,8 +1,15 @@
-import scala.scalajs.js.annotation._
+import com.raquo.laminar.api.L._
 
-@JSExportTopLevel("Main")
 object Main {
-    def main(args: Array[String]): Unit = {
-        println("¡Bienvenido a La Vecindad de los Secretos!")
-    }
+  def main(): Unit = {
+    renderOnDomContentLoaded(
+      dom.document.getElementById("app"),
+      div(
+        h1("Bienvenido a La Vecindad de los Secretos"),
+        p("Explora los misterios de la vecindad..."),
+        button("Descubrir", onClick --> (_ => println("¡Evento activado!")))
+      )
+    )
+  }
 }
+
