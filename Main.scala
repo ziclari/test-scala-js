@@ -1,4 +1,4 @@
-import com.raquo.laminar.api.L._
+import com.raquo.laminar.api.L.{*, given}
 
 object Main {
   def main(): Unit = {
