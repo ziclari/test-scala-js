@@ -21,7 +21,8 @@ jobs:
       - name: Install sbt
         run: |
           curl -L https://github.com/sbt/sbt/releases/download/v1.8.3/sbt-1.8.3.tgz | tar xz
-          echo "::add-path::$PWD/sbt/bin"
+          echo "$PWD/sbt/bin" >> $GITHUB_PATH
+
 
       - name: Compile Scala.js
         run: sbt fastOptJS
