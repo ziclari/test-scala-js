@@ -1,0 +1,27 @@
+[0m[[0m[0minfo[0m] [0m[0mFast optimizing /home/runner/work/test-scala-js/test-scala-js/target/scala-3.3.3/vecindaddelossecretos-fastopt[0m
+[0m[[0m[0mdebug[0m] [0m[0mLinker: Compute reachability: 330602 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mLinker: Assemble LinkedClasses: 25864 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mLinker: 383151 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mDesugarer: Desugar: 5132 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mDesugarer: 5504 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Batch mode: true[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Incremental part: 63421 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Elidable constructors: 1611 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Optimizing 701 methods.[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Optimizer part: 217497 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: 287936 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mRefiner: Compute reachability: 16845 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mRefiner: Assemble LinkedClasses: 2690 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mRefiner: 20842 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: Calculate Dependency Info: 1588 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: Analyze Modules: 446 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: Assemble Modules: 4150 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: 7203 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Generate Classes: 160901 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Write trees: 50416 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Class tree cache stats: reused: 0 -- invalidated: 53[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Method tree cache stats: reused: 0 -- invalidated: 113[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Pre prints: 207[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: 233551 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mBasicBackend: Write result: 32608 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mBasicBackend: total modules: 1; re-written: 1[0m
