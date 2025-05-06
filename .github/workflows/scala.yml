@@ -1,0 +1,34 @@
+name: Build and Deploy Scala.js
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Scala
+        uses: olafurpg/setup-scala@v12
+        with:
+          java-version: "11"
+
+      - name: Install sbt
+        run: |
+          curl -L https://github.com/sbt/sbt/releases/download/v1.8.3/sbt-1.8.3.tgz | tar xz
+          echo "::add-path::$PWD/sbt/bin"
+
+      - name: Compile Scala.js
+        run: sbt fastOptJS
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: target/scala-2.13
+
