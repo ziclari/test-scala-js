@@ -1,4 +1,5 @@
 import com.raquo.laminar.api.L.{*, given}
+import org.scalajs.dom
 
 object Main {
   def main(): Unit = {
