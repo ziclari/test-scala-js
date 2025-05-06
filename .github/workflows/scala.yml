@@ -29,7 +29,7 @@ jobs:
 
 
       - name: Compile Scala.js
-        run: sbt fastOptJS
+        run: sbt fastLinkJS
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
