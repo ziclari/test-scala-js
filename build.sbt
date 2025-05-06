@@ -5,4 +5,3 @@ name := "VecindadDeLosSecretos"
 version := "0.1.0"
 
 scalaJSUseMainModuleInitializer := true
-scalaJSMainModuleInitializer := Some(ModuleInitializer.mainMethod("Main", "main"))
