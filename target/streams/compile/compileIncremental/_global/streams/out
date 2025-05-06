@@ -10,10 +10,10 @@
 [0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
 [0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/runner/work/test-scala-js/test-scala-js/target/scala-3.3.3/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mReturning already retrieved and compiled bridge: /home/runner/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-sbt-bridge/3.3.3/scala3-sbt-bridge-3.3.3.jar.[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 4817bf16 for Scala Compiler version 3.3.3[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 28ebc723 for Scala Compiler version 3.3.3[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-scalajs[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/runner/work/test-scala-js/test-scala-js/target/scala-3.3.3/classes:/home/runner/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-library_sjs1_3/3.3.3/scala3-library_sjs1_3-3.3.3.jar:/home/runner/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.19.0/scalajs-library_2.13-1.19.0.jar:/home/runner/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.16/scala-library-2.13.16.jar:/home/runner/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-javalib/1.19.0/scalajs-javalib-1.19.0.jar:/home/runner/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-scalalib_2.13/2.13.16%2B1.19.0/scalajs-scalalib_2.13-2.13.16%2B1.19.0.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 2.446977532 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 2.529431275 s[0m
 [0m[[0m[0minfo[0m] [0m[0mdone compiling[0m
