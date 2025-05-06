@@ -1,6 +1,8 @@
 import scala.scalajs.js.annotation._
 
-@JSExportTopLevel("saludo")
-def saludo(): Unit = {
-  println("¡Bienvenido a La Vecindad de los Secretos!")
+@JSExportTopLevel("Main")
+object Main {
+    def main(): Unit = {
+        println("¡Bienvenido a La Vecindad de los Secretos!")
+    }
 }
