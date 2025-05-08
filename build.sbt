@@ -1,6 +1,7 @@
 enablePlugins(ScalaJSPlugin)
+
 Compile / resourceGenerators += Def.task {
-  val htmlFile = baseDirectory.value / "src" / "main" / "resources" / "index.html"
+  val htmlFile = baseDirectory.value / "resources" / "index.html"
   val targetDir = baseDirectory.value / "target" / "scala-3.3.3"
   
   IO.createDirectory(targetDir) // Asegura que el directorio exista
