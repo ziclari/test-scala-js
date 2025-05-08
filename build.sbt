@@ -1,4 +1,13 @@
 enablePlugins(ScalaJSPlugin)
+Compile / resourceGenerators += Def.task {
+  val htmlFile = baseDirectory.value / "src" / "main" / "resources" / "index.html"
+  val targetDir = baseDirectory.value / "target" / "scala-3.3.3"
+  
+  IO.createDirectory(targetDir) // Asegura que el directorio exista
+  IO.copyFile(htmlFile, targetDir / "index.html")
+  
+  Seq(targetDir / "index.html")
+}
 
 libraryDependencies += "com.raquo" %%% "laminar" % "17.0.0"
 
