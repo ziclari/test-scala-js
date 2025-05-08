@@ -34,7 +34,7 @@ object Main {
     )
   }
   def cambiarImagen(nuevaImagen: String): Unit = {
-    imagenGato.amend(cls := nuevaImagen)
+    imagenGato.ref.setAttribute("class", s"gato $nuevaClase")
   }
   def actualizarEstado(texto: String): Unit = {
     dom.document.getElementById("estadoGato").textContent = texto
