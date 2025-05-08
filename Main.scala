@@ -11,21 +11,26 @@ object Main {
       imagenGato,
       button("🐟 Dar comida", onClick --> { _ =>
         felicidad += 5
-        cambiarImagen("gato_comiendo")
+        cambiarImagen("gato-comiendo")
         actualizarEstado("¡El gato disfruta su comida! 😺")
+        cls := "boton-comida"
       }),
       button("🎾 Jugar", onClick --> { _ =>
         felicidad += 3
-        cambiarImagen("gato_jugando")
+        cambiarImagen("gato-jugando")
         actualizarEstado("¡El gato corre tras la pelota! 🏃‍♂️😸")
+        cls := "boton-jugar"
       }),
       button("💤 Dormir", onClick --> { _ =>
         felicidad += 2
-        cambiarImagen("gato_durmiendo")
+        cambiarImagen("gato-durmiendo")
         actualizarEstado("El gato duerme plácidamente. 😽")
+        cls := "boton-dormir"
       }),
       p(child.text <-- Signal.fromValue(s"Nivel de felicidad: $felicidad")),
       p(idAttr := "estadoGato")
+
+      cls := "gato-contenedor"
     )
 
     renderOnDomContentLoaded(
@@ -34,7 +39,7 @@ object Main {
     )
   }
   def cambiarImagen(nuevaImagen: String): Unit = {
-    imagenGato.ref.setAttribute("class", s"gato $nuevaImagen")
+    imagenGato.ref.setAttribute("class", s"$nuevaImagen")
   }
   def actualizarEstado(texto: String): Unit = {
     dom.document.getElementById("estadoGato").textContent = texto
