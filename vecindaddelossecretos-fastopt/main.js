@@ -1088,9 +1088,7 @@ $c_LMain$.prototype.main__AT__V = (function(args) {
   $f_Lcom_raquo_airstream_core_BaseObservable__foreach__F1__Lcom_raquo_airstream_ownership_Owner__Lcom_raquo_airstream_ownership_Subscription(this$22, onNext$3, owner);
 });
 $c_LMain$.prototype.cambiarImagen__T__V = (function(nuevaImagen) {
-  var this$1 = $n(this.LMain$__f_imagenGato);
-  var mods = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter(nuevaImagen)]));
-  $f_Lcom_raquo_laminar_nodes_ReactiveElement__amend__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveElement(this$1, mods);
+  $n(this.LMain$__f_imagenGato).Lcom_raquo_laminar_nodes_ReactiveHtmlElement__f_ref.setAttribute("class", ("gato " + nuevaImagen));
 });
 $c_LMain$.prototype.actualizarEstado__T__V = (function(texto) {
   document.getElementById("estadoGato").textContent = texto;
@@ -9824,31 +9822,6 @@ function $f_Lcom_raquo_laminar_nodes_ReactiveElement__updateCompositeValue__Lcom
   var nextDomValues = this$10.appendedAll__sc_IterableOnce__sci_List(result$3);
   $thiz.Lcom_raquo_laminar_nodes_ReactiveHtmlElement__f_com$raquo$laminar$nodes$ReactiveElement$$_compositeValues = $as_sci_Map($n($thiz.Lcom_raquo_laminar_nodes_ReactiveHtmlElement__f_com$raquo$laminar$nodes$ReactiveElement$$_compositeValues).updated__O__O__sci_MapOps(key, newItems));
   $n($n(key).Lcom_raquo_laminar_keys_CompositeKey__f_setRawDomValue).apply__O__O__O($thiz, $n($n(key).Lcom_raquo_laminar_keys_CompositeKey__f_codec).encode__sc_Iterable__T(nextDomValues));
-}
-function $f_Lcom_raquo_laminar_nodes_ReactiveElement__amend__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveElement($thiz, mods) {
-  var this$2 = $m_Lcom_raquo_airstream_core_Transaction$onStart$();
-  var f = (() => {
-    $n(mods).foreach__F1__V(new $c_sjsr_AnonFunction1_$$Lambda$3aa60c34ef08a878abffbf4628007cc68fa3c7ab(((mod) => {
-      var mod$1 = $as_Lcom_raquo_laminar_modifiers_Modifier(mod);
-      $n(mod$1).apply__Lcom_raquo_laminar_nodes_ReactiveElement__V($thiz);
-    })));
-    return $thiz;
-  });
-  $m_Lcom_raquo_airstream_core_Transaction$onStart$();
-  var when = true;
-  if ((this$2.Lcom_raquo_airstream_core_Transaction$onStart$__f_isSharedStart || (!when))) {
-    var $x_1 = f();
-  } else {
-    this$2.Lcom_raquo_airstream_core_Transaction$onStart$__f_isSharedStart = true;
-    try {
-      var result = f();
-    } finally {
-      this$2.Lcom_raquo_airstream_core_Transaction$onStart$__f_isSharedStart = false;
-      $p_Lcom_raquo_airstream_core_Transaction$onStart$__resolve__V(this$2);
-    }
-    var $x_1 = result;
-  }
-  return $as_Lcom_raquo_laminar_nodes_ReactiveElement($x_1);
 }
 function $f_Lcom_raquo_laminar_nodes_ReactiveElement__willSetParent__s_Option__V($thiz, maybeNextParent) {
   if ($p_Lcom_raquo_laminar_nodes_ReactiveElement__isUnmounting__s_Option__s_Option__Z($thiz, $thiz.Lcom_raquo_laminar_nodes_ReactiveHtmlElement__f_com$raquo$laminar$nodes$ChildNode$$_maybeParent, maybeNextParent)) {
