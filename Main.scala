@@ -6,31 +6,40 @@ object Main {
   val imagenGato = div( cls := "gato")
   def main(args: Array[String]): Unit = {
     val mensaje = div(
+      cls := "gato-contenedor",
+
       h1("Bienvenido a La Vecindad de los Secretos"),
       p("Explora los misterios de la vecindad..."),
       imagenGato,
-      button("🐟 Dar comida", onClick --> { _ =>
-        felicidad += 5
-        cambiarImagen("gato-comiendo")
-        actualizarEstado("¡El gato disfruta su comida! 😺")
-        cls := "boton-comida"
+
+      button(
+        "🐟 Dar comida",
+        cls := "boton-comida",
+        onClick --> { _ =>
+          felicidad += 5
+          cambiarImagen("gato-comiendo")
+          actualizarEstado("¡El gato disfruta su comida! 😺")
       }),
-      button("🎾 Jugar", onClick --> { _ =>
-        felicidad += 3
-        cambiarImagen("gato-jugando")
-        actualizarEstado("¡El gato corre tras la pelota! 🏃‍♂️😸")
-        cls := "boton-jugar"
+      button(
+        "🎾 Jugar", 
+        cls := "boton-jugar",
+        onClick --> { _ =>
+          felicidad += 3
+          cambiarImagen("gato-jugando")
+          actualizarEstado("¡El gato corre tras la pelota! 🏃‍♂️😸")
       }),
-      button("💤 Dormir", onClick --> { _ =>
-        felicidad += 2
-        cambiarImagen("gato-durmiendo")
-        actualizarEstado("El gato duerme plácidamente. 😽")
-        cls := "boton-dormir"
+      button(
+        "💤 Dormir",
+        cls := "boton-dormir",
+        onClick --> { _ =>
+          felicidad += 2
+          cambiarImagen("gato-durmiendo")
+          actualizarEstado("El gato duerme plácidamente. 😽")
       }),
+
       p(child.text <-- Signal.fromValue(s"Nivel de felicidad: $felicidad")),
       p(idAttr := "estadoGato")
 
-      cls := "gato-contenedor"
     )
 
     renderOnDomContentLoaded(
@@ -38,8 +47,9 @@ object Main {
       mensaje
     )
   }
+
   def cambiarImagen(nuevaImagen: String): Unit = {
-    imagenGato.ref.setAttribute("class", s"$nuevaImagen")
+    imagenGato.ref.setAttribute("class", nuevaImagen)
   }
   def actualizarEstado(texto: String): Unit = {
     dom.document.getElementById("estadoGato").textContent = texto
