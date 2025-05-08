@@ -28,7 +28,7 @@ jobs:
           echo "$PWD/sbt/bin" >> $GITHUB_PATH
 
       - name: Copiar index.html al directorio de salida
-        run: cp src/resources/index.html target/scala-3.3.3/
+        run: cp ./resources/index.html target/scala-3.3.3/
 
       - name: Compile Scala.js
         run: sbt fastLinkJS
