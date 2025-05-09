@@ -27,25 +27,19 @@ object Main {
       s"brightness(${brillo}%) contrast(${contraste}%) hue-rotate(${hue}deg)"
 
     // Filtros combinados
-filtroBase.set(
-  brilloBase.signal
-    .combineWithFn(contrasteBase.signal, (b: Int, c: Int) => (b, c))
-    .combineWithFn(hueBase.signal, (bc: (Int, Int), h: Int) => {
-      val (b, c) = bc
-      cssFilter(b, c, h)
-    })
-)
+brilloBase.signal
+  .combineWithFn(contrasteBase.signal)((b, c) => (b, c))
+  .combineWithFn(hueBase.signal)((bc, h) => {
+    val (b, c) = bc
+    cssFilter(b, c, h)
+  }) --> filtroBase
 
-filtroRopa.set(
-  brilloRopa.signal
-    .combineWithFn(contrasteRopa.signal, (b: Int, c: Int) => (b, c))
-    .combineWithFn(hueRopa.signal, (bc: (Int, Int), h: Int) => {
-      val (b, c) = bc
-      cssFilter(b, c, h)
-    })
-)
-
-
+brilloRopa.signal
+  .combineWithFn(contrasteRopa.signal)((b, c) => (b, c))
+  .combineWithFn(hueRopa.signal)((bc, h) => {
+    val (b, c) = bc
+    cssFilter(b, c, h)
+  }) --> filtroRopa
 
     val app = div(
       cls := "gato-contenedor",
