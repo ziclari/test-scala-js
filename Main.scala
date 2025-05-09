@@ -25,12 +25,17 @@ object Main {
     def cssFilter(brillo: Int, contraste: Int, hue: Int): String =
       s"brightness(${brillo}%) contrast(${contraste}%) hue-rotate(${hue}deg)"
 
-    // Actualizar filtros al combinar sliders
-    filtroBase <-- combineLatest3(brilloBase.signal, contrasteBase.signal, hueBase.signal)
-      .map(cssFilter)
+    // Filtros combinados
+    brilloBase.signal
+      .combineWith(contrasteBase.signal)
+      .combineWith(hueBase.signal)
+      .map { case ((b, c), h) => cssFilter(b, c, h) } --> filtroBase
 
-    filtroRopa <-- combineLatest3(brilloRopa.signal, contrasteRopa.signal, hueRopa.signal)
-      .map(cssFilter)
+    brilloRopa.signal
+      .combineWith(contrasteRopa.signal)
+      .combineWith(hueRopa.signal)
+      .map { case ((b, c), h) => cssFilter(b, c, h) } --> filtroRopa
+
 
     val app = div(
       cls := "gato-contenedor",
@@ -41,13 +46,14 @@ object Main {
       div(
         idAttr := "container",
         img(
+          cls := "layer",
           src := "assets/base.png",
-          cls := "layer"
+          styleAttr <-- filtroBase.signal.map(f => s"filter: $f")
         ),
         img(
           cls := "layer",
           src <-- ropaActual.signal,
-          styleAttr <-- filtroActual.signal.map(f => s"filter: $f")
+          styleAttr <-- filtroRopa.signal.map(f => s"filter: $f")
         )
       ),
 
@@ -94,17 +100,6 @@ object Main {
             actualizarEstado("El gato duerme plácidamente. 😽")
           }
         )
-      ),
-
-      // Filtros
-      div(
-        h3("Cambiar filtro de color:"),
-        filterOptions.map { case (filtro, nombre) =>
-          button(
-            nombre,
-            onClick --> (_ => filtroActual.set(filtro))
-          )
-        }
       ),
 
       // Estado y felicidad
