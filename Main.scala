@@ -5,18 +5,33 @@ object Main {
 
   val felicidad = Var(0)
   val ropaActual = Var("assets/cow1.png")
-  val filtroActual = Var("none") // CSS filter
-
   val clothesOptions = List("cheetah1.png", "cow1.png", "flame1.png", "hair1.png", "tiger1.png")
-  val filterOptions = List(
-    "none" -> "Sin filtro",
-    "grayscale(100%)" -> "Blanco y negro",
-    "sepia(100%)" -> "Sepia",
-    "invert(100%)" -> "Invertir colores",
-    "hue-rotate(90deg)" -> "Colores 90°"
-  )
+  
+  // Filtros independientes para base y ropa
+  val filtroBase = Var("none")
+  val filtroRopa = Var("none")
+
+  // Sliders individuales
+  val brilloBase = Var(100)
+  val contrasteBase = Var(100)
+  val hueBase = Var(0)
+
+  val brilloRopa = Var(100)
+  val contrasteRopa = Var(100)
+  val hueRopa = Var(0)
 
   def main(args: Array[String]): Unit = {
+    // Función para construir la cadena de filtro
+    def cssFilter(brillo: Int, contraste: Int, hue: Int): String =
+      s"brightness(${brillo}%) contrast(${contraste}%) hue-rotate(${hue}deg)"
+
+    // Actualizar filtros al combinar sliders
+    filtroBase <-- combineLatest3(brilloBase.signal, contrasteBase.signal, hueBase.signal)
+      .map(cssFilter)
+
+    filtroRopa <-- combineLatest3(brilloRopa.signal, contrasteRopa.signal, hueRopa.signal)
+      .map(cssFilter)
+
     val app = div(
       cls := "gato-contenedor",
       h1("Bienvenido a La Vecindad de los Secretos"),
@@ -36,9 +51,9 @@ object Main {
         )
       ),
 
-      // Botones de ropa
+      // Selección de ropa
+      h3("Selecciona un estilo:"),
       div(
-        idAttr := "buttons",
         clothesOptions.map { filename =>
           button(
             filename.stripSuffix(".png").capitalize,
@@ -46,8 +61,16 @@ object Main {
           )
         }
       ),
+      // Filtros base
+      h3("Filtro para imagen base"),
+      filtroControls(brilloBase, contrasteBase, hueBase),
 
-      // Botones de acción (alimentar, jugar, dormir)
+      // Filtros ropa
+      h3("Filtro para ropa"),
+      filtroControls(brilloRopa, contrasteRopa, hueRopa),
+
+      // Acciones
+      h3("Acciones del gato"),
       div(
         cls := "boton-contenedor",
         button(
@@ -97,5 +120,27 @@ object Main {
 
   def actualizarEstado(texto: String): Unit = {
     dom.document.getElementById("estadoGato").textContent = texto
+  }
+  def filtroControls(brillo: Var[Int], contraste: Var[Int], hue: Var[Int]): HtmlElement = {
+    div(
+      label("Brillo:"),
+      input(
+        typ := "range",
+        min := "50", max := "200", value := "100",
+        onInput.mapToValue.map(_.toInt) --> brillo
+      ),
+      label("Contraste:"),
+      input(
+        typ := "range",
+        min := "50", max := "200", value := "100",
+        onInput.mapToValue.map(_.toInt) --> contraste
+      ),
+      label("Tono (Hue):"),
+      input(
+        typ := "range",
+        min := "0", max := "360", value := "0",
+        onInput.mapToValue.map(_.toInt) --> hue
+      )
+    )
   }
 }
