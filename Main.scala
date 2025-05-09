@@ -26,16 +26,19 @@ object Main {
       s"brightness(${brillo}%) contrast(${contraste}%) hue-rotate(${hue}deg)"
 
     // Filtros combinados
-    brilloBase.signal
-      .combineWith(contrasteBase.signal)
-      .combineWith(hueBase.signal)
-      .map { case ((b, c), h) => cssFilter(b, c, h) } --> filtroBase
+    filtroBase <-- brilloBase.signal
+      .combineWithFn(contrasteBase.signal, (b, c) => (b, c))
+      .combineWithFn(hueBase.signal, ((bc, h) => {
+        val (b, c) = bc
+        cssFilter(b, c, h)
+      }))
 
-    brilloRopa.signal
-      .combineWith(contrasteRopa.signal)
-      .combineWith(hueRopa.signal)
-      .map { case ((b, c), h) => cssFilter(b, c, h) } --> filtroRopa
-
+    filtroRopa <-- brilloRopa.signal
+      .combineWithFn(contrasteRopa.signal, (b, c) => (b, c))
+      .combineWithFn(hueRopa.signal, ((bc, h) => {
+        val (b, c) = bc
+        cssFilter(b, c, h)
+      }))
 
     val app = div(
       cls := "gato-contenedor",
@@ -121,19 +124,27 @@ object Main {
       label("Brillo:"),
       input(
         typ := "range",
-        min := "50", max := "200", value := "100",
+        attr("min") := "50",
+        attr("max") := "200",
+        attr("value") := "100",
         onInput.mapToValue.map(_.toInt) --> brillo
       ),
+
       label("Contraste:"),
       input(
         typ := "range",
-        min := "50", max := "200", value := "100",
+        attr("min") := "50",
+        attr("max") := "200",
+        attr("value") := "100",
         onInput.mapToValue.map(_.toInt) --> contraste
       ),
+
       label("Tono (Hue):"),
       input(
         typ := "range",
-        min := "0", max := "360", value := "0",
+        attr("min") := "0",
+        attr("max") := "360",
+        attr("value") := "0",
         onInput.mapToValue.map(_.toInt) --> hue
       )
     )
