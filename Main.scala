@@ -1,4 +1,5 @@
 import com.raquo.laminar.api.L.{*, given}
+import com.raquo.laminar.api.features.unitArrows.*
 import org.scalajs.dom
 
 object Main {
@@ -26,19 +27,20 @@ object Main {
       s"brightness(${brillo}%) contrast(${contraste}%) hue-rotate(${hue}deg)"
 
     // Filtros combinados
-    filtroBase <-- brilloBase.signal
-      .combineWithFn(contrasteBase.signal, (b, c) => (b, c))
-      .combineWithFn(hueBase.signal, ((bc, h) => {
+    brilloBase.signal
+      .combineWithFn(contrasteBase.signal, (b: Int, c: Int) => (b, c))
+      .combineWithFn(hueBase.signal, (bc: (Int, Int), h: Int) => {
         val (b, c) = bc
         cssFilter(b, c, h)
-      }))
+      }) --> filtroBase.writer
 
-    filtroRopa <-- brilloRopa.signal
-      .combineWithFn(contrasteRopa.signal, (b, c) => (b, c))
-      .combineWithFn(hueRopa.signal, ((bc, h) => {
-        val (b, c) = bc
-        cssFilter(b, c, h)
-      }))
+   brilloRopa.signal
+    .combineWithFn(contrasteRopa.signal, (b: Int, c: Int) => (b, c))
+    .combineWithFn(hueRopa.signal, (bc: (Int, Int), h: Int) => {
+      val (b, c) = bc
+      cssFilter(b, c, h)
+    }) --> filtroRopa.writer
+
 
     val app = div(
       cls := "gato-contenedor",
@@ -124,27 +126,27 @@ object Main {
       label("Brillo:"),
       input(
         typ := "range",
-        attr("min") := "50",
-        attr("max") := "200",
-        attr("value") := "100",
+        minAttr := "50",
+        maxAttr := "200",
+        value := "100",
         onInput.mapToValue.map(_.toInt) --> brillo
       ),
 
       label("Contraste:"),
       input(
         typ := "range",
-        attr("min") := "50",
-        attr("max") := "200",
-        attr("value") := "100",
+        minAttr := "50",
+        maxAttr := "200",
+        value := "100",
         onInput.mapToValue.map(_.toInt) --> contraste
       ),
 
       label("Tono (Hue):"),
       input(
         typ := "range",
-        attr("min") := "0",
-        attr("max") := "360",
-        attr("value") := "0",
+        minAttr := "0",
+        maxAttr := "360",
+        value := "0",
         onInput.mapToValue.map(_.toInt) --> hue
       )
     )
