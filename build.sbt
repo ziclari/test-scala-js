@@ -10,6 +10,21 @@ Compile / resourceGenerators += Def.task {
   Seq(targetDir / "index.html")
 }
 
+Compile / resourceGenerators += Def.task {
+  val resDir = baseDirectory.value / "resources"
+  val targetDir = baseDirectory.value / "target" / "scala-3.3.3"
+
+  IO.createDirectory(targetDir)
+  IO.copyFile(resDir / "index.html", targetDir / "index.html")
+
+  // Copiar carpeta de imágenes
+  val assetsDir = resDir / "assets"
+  val targetAssetsDir = targetDir / "assets"
+  IO.copyDirectory(assetsDir, targetAssetsDir)
+
+  Seq(targetDir / "index.html")
+}
+
 libraryDependencies += "com.raquo" %%% "laminar" % "17.0.0"
 
 scalaVersion := "3.3.3"
