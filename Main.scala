@@ -27,19 +27,23 @@ object Main {
       s"brightness(${brillo}%) contrast(${contraste}%) hue-rotate(${hue}deg)"
 
     // Filtros combinados
-filtroBase.writer <-- brilloBase.signal
-  .combineWithFn(contrasteBase.signal, (b: Int, c: Int) => (b, c))
-  .combineWithFn(hueBase.signal, ((bc: (Int, Int), h: Int) => {
-    val (b, c) = bc
-    cssFilter(b, c, h)
-  })) 
+filtroBase.set(
+  brilloBase.signal
+    .combineWithFn(contrasteBase.signal, (b: Int, c: Int) => (b, c))
+    .combineWithFn(hueBase.signal, (bc: (Int, Int), h: Int) => {
+      val (b, c) = bc
+      cssFilter(b, c, h)
+    })
+)
 
-filtroRopa.writer <-- brilloRopa.signal
-  .combineWithFn(contrasteRopa.signal, (b: Int, c: Int) => (b, c))
-  .combineWithFn(hueRopa.signal, ((bc: (Int, Int), h: Int) => {
-    val (b, c) = bc
-    cssFilter(b, c, h)
-  })) 
+filtroRopa.set(
+  brilloRopa.signal
+    .combineWithFn(contrasteRopa.signal, (b: Int, c: Int) => (b, c))
+    .combineWithFn(hueRopa.signal, (bc: (Int, Int), h: Int) => {
+      val (b, c) = bc
+      cssFilter(b, c, h)
+    })
+)
 
 
 
