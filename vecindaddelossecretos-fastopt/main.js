@@ -1001,7 +1001,7 @@ function $s_LMain__main__AT__V(args) {
   $m_LMain$().main__AT__V(args);
 }
 function $p_LMain$__cssFilter$1__I__I__I__T($thiz, brillo, contraste, hue) {
-  return (((((("brightness(" + brillo) + "%) contrast(") + contraste) + "%) hue-rotate(") + hue) + "deg)");
+  return (((((("sepia(1) brightness(" + brillo) + "%) contrast(") + contraste) + "%) hue-rotate(") + hue) + "deg)");
 }
 /** @constructor */
 function $c_LMain$() {
