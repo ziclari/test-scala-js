@@ -38,7 +38,7 @@ object Main {
           val filtro = cssFilter(b, c, h)
           println(s"[DEBUG] Filtro base: $filtro")
           filtro
-        }).toSignal("none")
+        })
 
     val filtroRopa: Signal[String] =
       brilloRopa.signal
@@ -48,7 +48,7 @@ object Main {
           val filtro = cssFilter(b, c, h)
           println(s"[DEBUG] Filtro ropa: $filtro")
           filtro
-        }).toSignal("none")
+        })
 
 
     val app = div(
