@@ -27,7 +27,7 @@ object Main {
   def main(args: Array[String]): Unit = {
     // Función para construir la cadena de filtro
     def cssFilter(brillo: Int, contraste: Int, hue: Int): String =
-      s"brightness(${brillo}%) contrast(${contraste}%) hue-rotate(${hue}deg)"
+      s"sepia(1) brightness(${brillo}%) contrast(${contraste}%) hue-rotate(${hue}deg)"
 
     // Definir señales que combinan los sliders para producir el filtro
     val filtroBase: Signal[String] =
