@@ -21,25 +21,39 @@ object Main {
   val contrasteRopa = Var(100)
   val hueRopa = Var(0)
 
+  brilloBase.signal --> Observer(v => println(s"Brillo base: $v"))
+  contrasteBase.signal --> Observer(v => println(s"Contraste base: $v"))
+  hueBase.signal --> Observer(v => println(s"Hue base: $v"))
+  filtroBase.signal --> Observer(f => println(s"[DEBUG] filtro base: $f"))
+
+  brilloRopa.signal --> Observer(v => println(s"Brillo ropa: $v"))
+  contrasteRopa.signal --> Observer(v => println(s"Contraste ropa: $v"))
+  hueRopa.signal --> Observer(v => println(s"Hue ropa: $v"))
+  filtroRopa.signal --> Observer(f => println(s"[DEBUG] filtro ropa: $f"))
+
   def main(args: Array[String]): Unit = {
     // Función para construir la cadena de filtro
     def cssFilter(brillo: Int, contraste: Int, hue: Int): String =
       s"brightness(${brillo}%) contrast(${contraste}%) hue-rotate(${hue}deg)"
 
     // Filtros combinados
-brilloBase.signal
-  .combineWithFn(contrasteBase.signal)((b, c) => (b, c))
-  .combineWithFn(hueBase.signal)((bc, h) => {
-    val (b, c) = bc
-    cssFilter(b, c, h)
-  }) --> filtroBase
+    filtroBase = brilloBase.signal
+    .combineWithFn(contrasteBase.signal)((b, c) => (b, c))
+    .combineWithFn(hueBase.signal)((bc, h) => {
+      val (b, c) = bc
+      val filtro = cssFilter(b, c, h)
+      println(s"Filtro base generado: $filtro")
+      filtro
+    }).toSignal("none")
 
-brilloRopa.signal
-  .combineWithFn(contrasteRopa.signal)((b, c) => (b, c))
-  .combineWithFn(hueRopa.signal)((bc, h) => {
-    val (b, c) = bc
-    cssFilter(b, c, h)
-  }) --> filtroRopa
+    filtroRopa = brilloRopa.signal
+    .combineWithFn(contrasteRopa.signal)((b, c) => (b, c))
+    .combineWithFn(hueRopa.signal)((bc, h) => {
+      val (b, c) = bc
+      val filtro = cssFilter(b, c, h)
+      println(s"Filtro ropa generado: $filtro")
+      filtro
+    }).toSignal("none")
 
     val app = div(
       cls := "gato-contenedor",
@@ -52,12 +66,12 @@ brilloRopa.signal
         img(
           cls := "layer",
           src := "assets/base.png",
-          styleProp("filter") <-- filtroBase.signal
+          styleProp("filter") <-- filtroBase
         ),
         img(
           cls := "layer",
           src <-- ropaActual.signal,
-          styleProp("filter") <-- filtroRopa.signal
+          styleProp("filter") <-- filtroRopa
         )
       ),
 
