@@ -52,12 +52,12 @@ brilloRopa.signal
         img(
           cls := "layer",
           src := "assets/base.png",
-          style <-- filtroBase.signal.map(f => s"filter: $f")
+          filter <-- filtroBase.signal
         ),
         img(
           cls := "layer",
           src <-- ropaActual.signal,
-          style <-- filtroRopa.signal.map(f => s"filter: $f")
+          filter <-- filtroRopa.signal
         )
       ),
 
