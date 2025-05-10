@@ -7,12 +7,7 @@ object Main {
   val felicidad = Var(0)
   val ropaActual = Var("assets/cow1.png")
   val clothesOptions = List("cheetah1.png", "cow1.png", "flame1.png", "hair1.png", "tiger1.png")
-  
-  // Filtros independientes para base y ropa
-  val filtroBase = Var("none")
-  val filtroRopa = Var("none")
 
-  // Sliders individuales
   val brilloBase = Var(100)
   val contrasteBase = Var(100)
   val hueBase = Var(0)
@@ -24,36 +19,37 @@ object Main {
   brilloBase.signal --> Observer(v => println(s"Brillo base: $v"))
   contrasteBase.signal --> Observer(v => println(s"Contraste base: $v"))
   hueBase.signal --> Observer(v => println(s"Hue base: $v"))
-  filtroBase.signal --> Observer(f => println(s"[DEBUG] filtro base: $f"))
 
   brilloRopa.signal --> Observer(v => println(s"Brillo ropa: $v"))
   contrasteRopa.signal --> Observer(v => println(s"Contraste ropa: $v"))
   hueRopa.signal --> Observer(v => println(s"Hue ropa: $v"))
-  filtroRopa.signal --> Observer(f => println(s"[DEBUG] filtro ropa: $f"))
-
+  
   def main(args: Array[String]): Unit = {
     // Función para construir la cadena de filtro
     def cssFilter(brillo: Int, contraste: Int, hue: Int): String =
       s"brightness(${brillo}%) contrast(${contraste}%) hue-rotate(${hue}deg)"
 
-    // Filtros combinados
-    filtroBase = brilloBase.signal
-    .combineWithFn(contrasteBase.signal)((b, c) => (b, c))
-    .combineWithFn(hueBase.signal)((bc, h) => {
-      val (b, c) = bc
-      val filtro = cssFilter(b, c, h)
-      println(s"Filtro base generado: $filtro")
-      filtro
-    }).toSignal("none")
+    // Definir señales que combinan los sliders para producir el filtro
+    val filtroBase: Signal[String] =
+      brilloBase.signal
+        .combineWithFn(contrasteBase.signal)((b, c) => (b, c))
+        .combineWithFn(hueBase.signal)((bc, h) => {
+          val (b, c) = bc
+          val filtro = cssFilter(b, c, h)
+          println(s"[DEBUG] Filtro base: $filtro")
+          filtro
+        }).toSignal("none")
 
-    filtroRopa = brilloRopa.signal
-    .combineWithFn(contrasteRopa.signal)((b, c) => (b, c))
-    .combineWithFn(hueRopa.signal)((bc, h) => {
-      val (b, c) = bc
-      val filtro = cssFilter(b, c, h)
-      println(s"Filtro ropa generado: $filtro")
-      filtro
-    }).toSignal("none")
+    val filtroRopa: Signal[String] =
+      brilloRopa.signal
+        .combineWithFn(contrasteRopa.signal)((b, c) => (b, c))
+        .combineWithFn(hueRopa.signal)((bc, h) => {
+          val (b, c) = bc
+          val filtro = cssFilter(b, c, h)
+          println(s"[DEBUG] Filtro ropa: $filtro")
+          filtro
+        }).toSignal("none")
+
 
     val app = div(
       cls := "gato-contenedor",
